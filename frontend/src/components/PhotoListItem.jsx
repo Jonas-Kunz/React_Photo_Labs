@@ -1,7 +1,7 @@
 import React from "react";
 
 import "../styles/PhotoListItem.scss";
-
+import PhotoFavButton from 'components/PhotoFavButton';
 // const sampleDataForPhotoListItem = {
 //   id: "1",
 //   location: {
@@ -17,6 +17,7 @@ const PhotoListItem = (props) => {
   const { id, location, urls, user } = props
   return (
     <article key={id} className="photo-list__item">
+      <PhotoFavButton/>
       <img src={urls.regular} className="photo-list__image"/>
       <footer className="photo-list__user-details">
         <img src={user.profile} className="photo-list__user-profile"/>
