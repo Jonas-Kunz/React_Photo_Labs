@@ -14,9 +14,9 @@ import PhotoFavButton from 'components/PhotoFavButton';
 // };
 
 const PhotoListItem = (props) => {
-  const { id, location, urls, user } = props
+  const { location, urls, user } = props
   return (
-    <article key={id} className="photo-list__item">
+    <article  className="photo-list__item">
       <PhotoFavButton/>
       <img src={urls.regular} className="photo-list__image"/>
       <footer className="photo-list__user-details">
