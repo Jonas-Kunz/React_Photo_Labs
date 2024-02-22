@@ -6,7 +6,7 @@ import "../styles/HomeRoute.scss";
 
 const HomeRoute = (props) => {
   // recieving topics and photos data from <App>
-  const { photos, topics, setIsOpen } = props;
+  const { photos, topics, setModalDisplay } = props;
   // my state for liked photos
   const [likedPhotos, setLikedPhotos] = useState([]);
 
@@ -44,7 +44,7 @@ const HomeRoute = (props) => {
         photos={photos}
         likedPhotos={likedPhotos}
         toggleLikePhoto={toggleLikePhoto}
-        setIsOpen={setIsOpen}
+        setModalDisplay={setModalDisplay}
       />
     </div>
   );

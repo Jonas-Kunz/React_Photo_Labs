@@ -9,12 +9,12 @@ import topics from './mocks/topics';
 
 const App = () => {
 
-  const [ isOpen, setIsOpen ] = useState(false);
+  const [ isOpen, setModalDisplay ] = useState(false);
 
   return (
     <div className="App">
-      <HomeRoute photos={photos} topics={topics} setIsOpen={setIsOpen}/>
-      {isOpen && <PhotoDetailsModal setIsOpen={setIsOpen}/>}
+      <HomeRoute photos={photos} topics={topics} setModalDisplay={setModalDisplay}/>
+      {isOpen && <PhotoDetailsModal setModalDisplay={setModalDisplay}/>}
     </div>
   );
 };
