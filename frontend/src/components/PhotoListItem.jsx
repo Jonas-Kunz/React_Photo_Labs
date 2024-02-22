@@ -5,12 +5,12 @@ import PhotoFavButton from "components/PhotoFavButton";
 // PhotoListItem gets props from PhotoList and creates a photo component
 // it also passes likedPhotos and toggleLikePhoto to PhotoFavButton so when users click on the button it alters the likedPhoto object
 const PhotoListItem = (props) => {
-  const { location, urls, user, likedPhotos, toggleLikePhoto, id, setModalDisplay } = props;
- 
+  const { location, urls, user, likedPhotos, toggleLikePhoto, id, setModalDisplay, photo, modalState } = props;
+  // console.log("photo Object", photo);
   return (
     <article className="photo-list__item" >
       <PhotoFavButton likedPhotos={likedPhotos} toggleLikePhoto={toggleLikePhoto} id={id}/>
-      <img src={urls.regular} className="photo-list__image" onClick={() => setModalDisplay(true)}/>
+      <img src={urls.regular} className="photo-list__image" onClick={() => setModalDisplay({isOpen: true, photo: photo})}/>
       <footer className="photo-list__user-details">
         <img src={user.profile} className="photo-list__user-profile" />
         <div className="photo-list__user-info">
