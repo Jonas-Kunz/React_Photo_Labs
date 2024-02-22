@@ -2,8 +2,9 @@ import React from "react";
 
 import "../styles/TopicList.scss";
 import TopicListItem from "./TopicListItem";
-// import topics from "../mocks/topics";
 
+// TopicList recieves the topics data from TopNavigation and performs a map transformation on the topics array
+// and creates an array of topicItems containing a TopicListItem for every topic within topics, this array is then rendered within TopicList
 const TopicList = (props) => {
   const { topics } = props;
   const topicItems = topics.map((topic) => (
