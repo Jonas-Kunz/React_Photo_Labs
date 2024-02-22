@@ -7,7 +7,7 @@ const TopNavigation = (props) => {
   // recieves the topics data and likedPhotos object as props
   const { topics, likedPhotos } = props;
   // if the likedPhotos object has any values isFavPhotExist is set true else false
-  const isFavPhotoExist = Object.values(likedPhotos).length > 0 ? true : false;
+  const isFavPhotoExist = Object.values(likedPhotos).length > 0;
   
   return (
     <div className="top-nav-bar">
