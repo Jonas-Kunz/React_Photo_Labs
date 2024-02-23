@@ -12,33 +12,33 @@ const App = () => {
     console.log("updated modalState:", modalState);
   }, [modalState]);
 
-  const [likedPhotos, setLikedPhotos] = useState([]);
+  const [favourites, setfavourites] = useState([]);
 
-  const toggleLikePhoto = useCallback(
+  const toggleFavourite = useCallback(
     (photoId) => {
-      setLikedPhotos((currentLikedPhotos) => {
-        // spread currentLikedPhotos to keep immutability
-        const updatedLikedPhotos = {
-          ...currentLikedPhotos,
+      setfavourites((currentfavourites) => {
+        // spread currentfavourites to keep immutability
+        const updatedfavourites = {
+          ...currentfavourites,
         };
         // if the photo is liked clicking the like button will delete the key
         // if the photo isnt liked create a key with value of true
-        if (updatedLikedPhotos[photoId]) {
-          delete updatedLikedPhotos[photoId];
+        if (updatedfavourites[photoId]) {
+          delete updatedfavourites[photoId];
         } else {
-          updatedLikedPhotos[photoId] = true;
+          updatedfavourites[photoId] = true;
         }
-        // return and update likedPhotos
-        return updatedLikedPhotos;
+        // return and update favourites
+        return updatedfavourites;
       });
     },
-    [likedPhotos]
+    [favourites]
   );
 
   // console log the liked photo object on change for debugging
   useEffect(() => {
-    console.log("updated LikedPhotos:", likedPhotos);
-  }, [likedPhotos]);
+    console.log("updated favourites:", favourites);
+  }, [favourites]);
 
   return (
     <div className="App">
@@ -47,15 +47,15 @@ const App = () => {
         topics={topics}
         setModalDisplay={setModalDisplay}
         modalState={modalState}
-        likedPhotos={likedPhotos}
-        toggleLikePhoto={toggleLikePhoto}
+        favourites={favourites}
+        toggleFavourite={toggleFavourite}
       />
       {modalState.isOpen && (
         <PhotoDetailsModal
           setModalDisplay={setModalDisplay}
           modalState={modalState}
-          likedPhotos={likedPhotos}
-          toggleLikePhoto={toggleLikePhoto}
+          favourites={favourites}
+          toggleFavourite={toggleFavourite}
         />
       )}
     </div>
