@@ -6,6 +6,11 @@
   border-style: solid;
   border-radius: 8px;
   max-width: fit-content;
+  background-color:#FFFFFF;
+
+  &:hover {
+    box-shadow: 10px 10px 5px darkgray;
+  }
 }
 
 .photo-list__image {

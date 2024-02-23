@@ -22,7 +22,7 @@ const FavIcon = ({ displayAlert, selected }) => {
           cx="21"
           cy="4"
           r="2.75"
-          fill="#FFFF00"
+          fill="rgb(13, 214, 13)"
           stroke="#C80000"
           strokeWidth="0.5"
         />
@@ -32,3 +32,4 @@ const FavIcon = ({ displayAlert, selected }) => {
 };
 
 export default FavIcon;
+// "#FFFF00"

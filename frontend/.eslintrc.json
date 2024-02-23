@@ -26,6 +26,9 @@
     "react"
   ],
   "rules": {
+    "no-multi-spaces": "error",
+    "no-trailing-spaces": "error",
+    "semi": ["error", "always"]
   },
   "settings": {
     "react": {

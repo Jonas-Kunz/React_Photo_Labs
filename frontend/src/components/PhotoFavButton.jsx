@@ -16,7 +16,7 @@ function PhotoFavButton(props) {
   return (
     <div className="photo-list__fav-icon" onClick={handleClick}>
       <div className="photo-list__fav-icon-svg">
-        <FavIcon selected={!!favourites[photoId]} />
+        <FavIcon selected={!!favourites[photoId]} displayAlert={!!favourites[photoId]}/>
       </div>
     </div>
   );

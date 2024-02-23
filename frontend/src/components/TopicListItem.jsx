@@ -7,7 +7,7 @@ const TopicListItem = (props) => {
 
   return (
     <div className="topic-list__item">
-      <a href={slug}>
+      <a href={slug} style={{ textDecoration: 'none' }}>
         <span>{title}</span>
       </a>
     </div>

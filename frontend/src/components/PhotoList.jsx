@@ -2,7 +2,7 @@ import React from "react";
 
 import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
-// PhotoList gets props from the HomeRoute containing the photos array, the toggleFavourite function to set the sate, 
+// PhotoList gets props from the HomeRoute containing the photos array, the toggleFavourite function to set the sate,
 //and the favourites object containign any liked photos
 const PhotoList = (props) => {
   const { photos, toggleFavourite, favourites, setModalDisplay, modalState } = props;
