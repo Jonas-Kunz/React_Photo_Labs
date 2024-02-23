@@ -4,36 +4,43 @@ import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import photos from "./mocks/photos";
 import topics from "./mocks/topics";
+import useApplicationData from "hooks/useApplicationData";
 // Note: Rendering a single component to build components in isolation
 
 const App = () => {
-  const [modalState, setModalDisplay] = useState({ isOpen: false });
-  useEffect(() => {
-    console.log("updated modalState:", modalState);
-  }, [modalState]);
+  // const [modalState, setModalDisplay] = useState({ isOpen: false });
+  // useEffect(() => {
+  //   console.log("updated modalState:", modalState);
+  // }, [modalState]);
 
-  const [favourites, setfavourites] = useState([]);
+  // const [favourites, setfavourites] = useState([]);
 
-  const toggleFavourite = useCallback(
-    (photoId) => {
-      setfavourites((currentfavourites) => {
-        // spread currentfavourites to keep immutability
-        const updatedfavourites = {
-          ...currentfavourites,
-        };
-        // if the photo is liked clicking the like button will delete the key
-        // if the photo isnt liked create a key with value of true
-        if (updatedfavourites[photoId]) {
-          delete updatedfavourites[photoId];
-        } else {
-          updatedfavourites[photoId] = true;
-        }
-        // return and update favourites
-        return updatedfavourites;
-      });
-    },
-    [favourites]
-  );
+  // const toggleFavourite = useCallback(
+  //   (photoId) => {
+  //     setfavourites((currentfavourites) => {
+  //       // spread currentfavourites to keep immutability
+  //       const updatedfavourites = {
+  //         ...currentfavourites,
+  //       };
+  //       // if the photo is liked clicking the like button will delete the key
+  //       // if the photo isnt liked create a key with value of true
+  //       if (updatedfavourites[photoId]) {
+  //         delete updatedfavourites[photoId];
+  //       } else {
+  //         updatedfavourites[photoId] = true;
+  //       }
+  //       // return and update favourites
+  //       return updatedfavourites;
+  //     });
+  //   },
+  //   [favourites]
+  // );
+  const {
+    modalState,
+    setModalDisplay,
+    favourites,
+    toggleFavourite
+  } = useApplicationData();
 
   // console log the liked photo object on change for debugging
   useEffect(() => {

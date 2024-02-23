@@ -7,7 +7,6 @@ import PhotoFavButton from "components/PhotoFavButton";
 
 const PhotoDetailsModal = (props) => {
   const { setModalDisplay, modalState, favourites, toggleFavourite } = props;
-  const { isOpen } = modalState.isOpen;
   const { photoId, location, similar_photos, urls, user } = modalState.photo;
   const similar_photosArray = Object.values(similar_photos);
 

@@ -6,27 +6,8 @@ import "../styles/HomeRoute.scss";
 
 const HomeRoute = (props) => {
   // recieving topics and photos data from <App>
-  const { photos, topics } = props;
-  // my state for liked photos
-  const [favourites, setfavourites] = useState([]);
-  // toggle like function to set state
-  const toggleFavourite = (photoId) => {
-    setfavourites((currentfavourites) => {
-      // spread currentfavourites to keep immutability
-      const updatedfavourites = {
-        ...currentfavourites,
-      };
-      // if the photo is liked clicking the like button will delete the key
-      // if the photo isnt liked create a key with value of true
-      if (updatedfavourites[photoId]) {
-        delete updatedfavourites[photoId];
-      } else {
-        updatedfavourites[photoId] = true;
-      }
-      // return and update favourites
-      return updatedfavourites;
-    });
-  };
+  const { photos, topics, favourites, toggleFavourite } = props;
+ 
   // console log the liked photo object on change for debugging
   useEffect(() => {
     console.log("updated favourites:", favourites);
