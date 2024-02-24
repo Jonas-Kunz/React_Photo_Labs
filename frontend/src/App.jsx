@@ -19,7 +19,7 @@ const App = () => {
         dispatch={dispatch}
       />
       {state.modalState.isOpen && (
-        <PhotoDetailsModal state={state} dispatch={dispatch} photos={photos}/>
+        <PhotoDetailsModal state={state} dispatch={dispatch}/>
       )}
     </div>
   );

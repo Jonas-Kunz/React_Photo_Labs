@@ -4,7 +4,7 @@ import FavBadge from "./FavBadge";
 import "../styles/TopNavigationBar.scss";
 
 const TopNavigation = (props) => {
-  // recieves the topics data and favourites object as props
+  // recieves the topics data and state props
   const { topics, state } = props;
   // if the favourites object has any values isFavPhotExist is set true else false
   const isFavPhotoExist = Object.values(state.favourites).length > 0;

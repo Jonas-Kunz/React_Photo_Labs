@@ -6,13 +6,9 @@ import PhotoList from "components/PhotoList";
 import PhotoFavButton from "components/PhotoFavButton";
 
 const PhotoDetailsModal = (props) => {
-  const { state, dispatch, photos } = props;
+  const { state, dispatch } = props;
   const { id, location, similar_photos, urls, user } = state.modalState.photo;
-  console.log("photos in Modal", photos);
-  // console.log("if this shows state has gotten to here", state.modalState);
-
   const similar_photosArray = Object.values(similar_photos);
-  console.log("similar Photos array in Modal", similar_photosArray);
 
   return (
     <div className="photo-details-modal">

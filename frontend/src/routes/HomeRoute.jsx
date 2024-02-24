@@ -3,16 +3,15 @@ import React from "react";
 import TopNavigation from "components/TopNavigationBar";
 import PhotoList from "components/PhotoList";
 import "../styles/HomeRoute.scss";
-
+// the home route mainly serves as a way to pass data to its children TopNavigation and Photolist
+// it recieves the photos array, topics array, state, and dispatch from App.jsx
 const HomeRoute = (props) => {
-  // recieving topics and photos data from <App>
   const { photos, topics, state, dispatch } = props;
-  // my state for liked photos
-
   return (
     <div className="home-route">
-      {/* I am passing liked photos to TopNavigation and PhotoList so they can interact with the state */}
+      {/* top navigation recieves topics and state so it can construct the topicsList and so it has info on favourited images*/}
       <TopNavigation topics={topics} state={state} />
+      {/*Photo list recieves the photos Data, state, and dispatch*/}
       <PhotoList photos={photos} state={state} dispatch={dispatch} />
     </div>
   );

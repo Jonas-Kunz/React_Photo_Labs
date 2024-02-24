@@ -3,11 +3,11 @@ import React from "react";
 import FavIcon from "./FavIcon";
 import "../styles/PhotoFavButton.scss";
 // each photo will contain this component
-// it is a button that recieves favourites, toggleFavourites, and the id of the photo
+// it is a button that recieves state, dispatch and the id of the photo
 function PhotoFavButton(props) {
-  // when the user clicks on the PhotoFavButton the onClick executes handleClick wich simply executes toggleFavourite with the photo id either
-  // adding or removing the photo from the likedPhoto object,
-  //and if the photo is in favourites then the Favicon will display red, and if not it will be unfilled.
+  // when the user clicks on the PhotoFavButton the onClick executes handleClick wich simply executes the dispatch with
+  // type type "toggleFavourite" and the data being the photoId.
+  // and if the photo is in favourites then the Favicon will display red, and if not it will be unfilled.
   const { state, dispatch, photoId } = props;
   const favourites = state.favourites;
   const handleClick = () => {

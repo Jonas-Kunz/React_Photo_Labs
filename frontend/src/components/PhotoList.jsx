@@ -2,13 +2,11 @@ import React from "react";
 
 import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
-// PhotoList gets props from the HomeRoute containing the photos array, the toggleFavourite function to set the sate,
-//and the favourites object containign any liked photos
+// PhotoList gets props from the HomeRoute containing the photos array, state, and dispatch
 const PhotoList = (props) => {
   const { photos, state, dispatch } = props;
   // inside PhotoList an array photoListItems is created containing a PhotoListItem for each element in the photos array
-  // this PhotListItem is given all the information for the specific photo as well as the favourites object, and the toggleFavourite function
-  // so that each photo can be added or removed from the likedPhoto object
+  // this PhotListItem is given all the information for the specific photo as well as the state and dispatch.
   const photoListItems = photos.map((photo) => (
     <PhotoListItem
       aria-label="list of images"
