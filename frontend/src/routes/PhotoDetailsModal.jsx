@@ -6,16 +6,25 @@ import PhotoList from "components/PhotoList";
 import PhotoFavButton from "components/PhotoFavButton";
 
 const PhotoDetailsModal = (props) => {
-  const { setModalDisplay, modalState, favourites, toggleFavourite } = props;
-  const { photoId, location, similar_photos, urls, user } = modalState.photo;
+  const { state, dispatch, photos } = props;
+  const { id, location, similar_photos, urls, user } = state.modalState.photo;
+  console.log("photos in Modal", photos);
+  // console.log("if this shows state has gotten to here", state.modalState);
+
   const similar_photosArray = Object.values(similar_photos);
+  console.log("similar Photos array in Modal", similar_photosArray);
 
   return (
     <div className="photo-details-modal">
       <header className="photo-details-modal__top-bar">
         <button
           className="photo-details-modal__close-button"
-          onClick={() => setModalDisplay({ isOpen: false })}
+          onClick={() =>
+            dispatch({
+              type: "setModalState",
+              data: { isOpen: false, photo: null },
+            })
+          }
           aria-label="close modal button"
         >
           <img src={closeSymbol} alt="close symbol" />
@@ -24,15 +33,12 @@ const PhotoDetailsModal = (props) => {
       <main className="photo-details-modal__images">
         <section>
           <PhotoFavButton
-            favourites={favourites}
-            toggleFavourite={toggleFavourite}
-            photoId={photoId}
+            state={state}
+            dispatch={dispatch}
+            photoId={id}
             aira-label="like Photo Button"
           />
-          <img
-            src={urls.full}
-            className="photo-details-modal__image"
-          />
+          <img src={urls.full} className="photo-details-modal__image" />
           <footer className="photo-details-modal__photographer-details">
             <img
               src={user.profile}
@@ -53,8 +59,8 @@ const PhotoDetailsModal = (props) => {
           <PhotoList
             aria-label="list of similar photos"
             photos={similar_photosArray}
-            favourites={favourites}
-            toggleFavourite={toggleFavourite}
+            state={state}
+            dispatch={dispatch}
           />
         </section>
       </main>

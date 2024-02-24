@@ -5,7 +5,7 @@ import PhotoListItem from "./PhotoListItem";
 // PhotoList gets props from the HomeRoute containing the photos array, the toggleFavourite function to set the sate,
 //and the favourites object containign any liked photos
 const PhotoList = (props) => {
-  const { photos, toggleFavourite, favourites, setModalDisplay, modalState } = props;
+  const { photos, state, dispatch } = props;
   // inside PhotoList an array photoListItems is created containing a PhotoListItem for each element in the photos array
   // this PhotListItem is given all the information for the specific photo as well as the favourites object, and the toggleFavourite function
   // so that each photo can be added or removed from the likedPhoto object
@@ -17,10 +17,8 @@ const PhotoList = (props) => {
       urls={photo.urls}
       user={photo.user}
       location={photo.location}
-      favourites={favourites}
-      toggleFavourite={toggleFavourite}
-      setModalDisplay={setModalDisplay}
-      modalState={modalState}
+      state={state}
+      dispatch={dispatch}
       photo={photo}
     />
   ));

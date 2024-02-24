@@ -5,9 +5,9 @@ import "../styles/TopNavigationBar.scss";
 
 const TopNavigation = (props) => {
   // recieves the topics data and favourites object as props
-  const { topics, favourites } = props;
+  const { topics, state } = props;
   // if the favourites object has any values isFavPhotExist is set true else false
-  const isFavPhotoExist = Object.values(favourites).length > 0;
+  const isFavPhotoExist = Object.values(state.favourites).length > 0;
 
   return (
     <div className="top-nav-bar">
