@@ -6,21 +6,20 @@ import PhotoList from "components/PhotoList";
 import PhotoFavButton from "components/PhotoFavButton";
 
 const PhotoDetailsModal = (props) => {
-  const { state, dispatch } = props;
-  const { id, location, similar_photos, urls, user } = state.modalState.photo;
-  const similar_photosArray = Object.values(similar_photos);
+  const { state, openModal, closeModal, addFavPhoto, removeFavPhoto, photos } =
+    props;
+  const { id, location, similar_photos, urls, user } = state.modalState;
+  const similar_photosArray = Object.values(similar_photos).map((photo) => {
+    const photoObj = photos.find((ph) => ph.id === photo.id);
+    return photoObj;
+  });
 
   return (
     <div className="photo-details-modal">
       <header className="photo-details-modal__top-bar">
         <button
           className="photo-details-modal__close-button"
-          onClick={() =>
-            dispatch({
-              type: "setModalState",
-              data: { isOpen: false, photo: null },
-            })
-          }
+          onClick={() => closeModal(null)}
           aria-label="close modal button"
         >
           <img src={closeSymbol} alt="close symbol" />
@@ -30,7 +29,8 @@ const PhotoDetailsModal = (props) => {
         <section>
           <PhotoFavButton
             state={state}
-            dispatch={dispatch}
+            addFavPhoto={addFavPhoto}
+            removeFavPhoto={removeFavPhoto}
             photoId={id}
             aira-label="like Photo Button"
           />
@@ -55,8 +55,11 @@ const PhotoDetailsModal = (props) => {
           <PhotoList
             aria-label="list of similar photos"
             photos={similar_photosArray}
+            openModal={openModal}
+            closeModal={closeModal}
+            addFavPhoto={addFavPhoto}
+            removeFavPhoto={removeFavPhoto}
             state={state}
-            dispatch={dispatch}
           />
         </section>
       </main>

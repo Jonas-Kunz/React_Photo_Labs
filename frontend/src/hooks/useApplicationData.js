@@ -1,22 +1,80 @@
 import { useReducer } from "react";
-import reducer from "helperFucntions/useApplicationDataReducer";
-// this is my useApplicationData hook which manages my state. My state is composed of two objects modalState, and favourites
-// both use objects to store the information of the app. modalState stores wether or not the modal is open in isOpen, and stores which image has been opened in photo
-// photo then contains the photo object of which ever photo was opened
-// favourites simply stores an object containg key vlaue pairs of the photos that have been favourited in the form {photoId1: true, photoId2: true}..etc
-// I decided to simply delete a photo from the object if it has been unfavourited so that I can reduce the amount of information I am storing so as to not clutter
-// up my state with data on every photo, only the ones that actully affect the rest of the program.
+
+const reducer = function (state, action) {
+  const ACTIONS = {
+    OPEN_MODAL: () => {
+      return {
+        ...state,
+        modalState: action.payload.photo,
+      };
+    },
+
+    CLOSE_MODAL: () => {
+      return {
+        ...state,
+        modalState: action.payload.photo,
+      };
+    },
+
+    ADD_FAV_PHOTO: () => {
+      return {
+        ...state,
+        favourites: {
+          ...state.favourites,
+          [action.payload]: true,
+        },
+      };
+    },
+
+    REMOVE_FAV_PHOTO: () => {
+      return {
+        ...state,
+        favourites: {
+          ...state.favourites,
+          [action.payload]: false,
+        },
+      };
+    },
+  };
+
+  return ACTIONS[action.type]();
+};
+
 export default function useApplicationData() {
   const initialState = {
-    modalState: { isOpen: false, photo: null },
+    modalState: null,
     favourites: {},
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const openModal = (photo) => {
+    dispatch({
+      type: "OPEN_MODAL",
+      payload: { photo: photo },
+    });
+  };
+
+  const closeModal = (photo) => {
+    dispatch({
+      type: "CLOSE_MODAL",
+      payload: { photo: photo },
+    });
+  };
+
+  const addFavPhoto = (photoId) => {
+    dispatch({ type: "ADD_FAV_PHOTO", payload: photoId });
+  };
+
+  const removeFavPhoto = (photoId) => {
+    dispatch({ type: "REMOVE_FAV_PHOTO", payload: photoId });
+  };
+
   return {
     state,
-    dispatch,
+    openModal,
+    closeModal,
+    addFavPhoto,
+    removeFavPhoto,
   };
 }
-
