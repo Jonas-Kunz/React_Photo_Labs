@@ -1,3 +1,8 @@
+
+// I am leaving this here because this is my original reducer i had before being told to refactor it. I feel that it is an interesting solution to the problem I was given
+// and think it is simpler than the new reducer.
+
+
 // this is my reducer function used in my useApplicationData hook
 // it has two actions: setModalState and toggleFavourite.
 // when a user clicks on an image on the main page they dispatch:
@@ -52,4 +57,4 @@ const reducer = function (state, action) {
   return updatedState;
 };
 
-export default reducer;
+// export default reducer;

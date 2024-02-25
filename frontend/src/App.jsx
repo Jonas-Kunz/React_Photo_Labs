@@ -2,8 +2,6 @@ import React from "react";
 import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
-import photos from "./mocks/photos";
-import topics from "./mocks/topics";
 import useApplicationData from "hooks/useApplicationData";
 // Note: Rendering a single component to build components in isolation
 
@@ -14,8 +12,8 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute
-        photos={photos}
-        topics={topics}
+        photos={state.photoData}
+        topics={state.topicData}
         state={state}
         openModal={openModal}
         closeModal={closeModal}
@@ -29,7 +27,7 @@ const App = () => {
           closeModal={closeModal}
           addFavPhoto={addFavPhoto}
           removeFavPhoto={removeFavPhoto}
-          photos={photos}
+          photos={state.photoData}
         />
       )}
     </div>
