@@ -34,6 +34,14 @@ const ACTIONS = {
     };
   },
 
+  SET_FAVORITES: (state, action) => {
+    console.log(action);
+    return {
+      ...state,
+      favourites: action.payload,
+    };
+  },
+
   SET_PHOTO_DATA: (state, action) => {
     return {
       ...state,
@@ -77,11 +85,21 @@ export default function useApplicationData() {
     photoData: [],
     topicData: [],
     modalState: null,
-    favourites: {},
+    favourites: JSON.parse(localStorage.getItem("favImages")),
     selectedTopic: 0,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const favImageLocal = (state) => {
+   
+    let favImages = JSON.parse(localStorage.getItem("favImages")) || {};
+  
+    favImages = state.favourites;
+   
+    localStorage.setItem("favImages", JSON.stringify(favImages));
+  };
+
   const openModal = (photo) => {
     dispatch({
       type: "OPEN_MODAL",
@@ -126,6 +144,27 @@ export default function useApplicationData() {
   };
 
   useEffect(() => {
+    favImageLocal(state);
+    console.log(
+      "localstore",
+      JSON.parse(localStorage.getItem("favImages")) || {}
+    );
+  }, [state.favourites]);
+
+  useEffect(() => {
+    console.log("state",state);
+  })
+
+  useEffect(() => {
+    // let favImages = { 51: true};
+    let favImages = JSON.parse(localStorage.getItem("favImages")) || {};
+    console.log("local Storage:", localStorage.getItem("favImages"));
+    dispatch({
+      type: "SET_FAVORITES",
+      payload: favImages
+    })
+    console.log("favImages", favImages);
+
     Promise.all([
       fetch("http://localhost:8001/api/photos").then((res) => res.json()),
       fetch("http://localhost:8001/api/topics").then((res) => res.json()),
