@@ -1,21 +1,21 @@
 import { useReducer, useEffect } from "react";
 
 const ACTIONS = {
-  OPEN_MODAL: (state,action) => {
+  OPEN_MODAL: (state, action) => {
     return {
       ...state,
       modalState: action.payload.photo,
     };
   },
 
-  CLOSE_MODAL: (state,action) => {
+  CLOSE_MODAL: (state, action) => {
     return {
       ...state,
       modalState: action.payload.photo,
     };
   },
 
-  ADD_FAV_PHOTO: (state,action) => {
+  ADD_FAV_PHOTO: (state, action) => {
     return {
       ...state,
       favourites: {
@@ -25,7 +25,7 @@ const ACTIONS = {
     };
   },
 
-  REMOVE_FAV_PHOTO: (state,action) => {
+  REMOVE_FAV_PHOTO: (state, action) => {
     const updatedFavourites = { ...state.favourites };
     delete updatedFavourites[action.payload];
     return {
@@ -34,17 +34,24 @@ const ACTIONS = {
     };
   },
 
-  SET_PHOTO_DATA: (state,action) => {
+  SET_PHOTO_DATA: (state, action) => {
     return {
       ...state,
       photoData: action.payload,
     };
   },
 
-  SET_TOPIC_DATA: (state,action) => {
+  SET_TOPIC_DATA: (state, action) => {
     return {
       ...state,
       topicData: action.payload,
+    };
+  },
+
+  SELECT_TOPIC: (state, action) => {
+    return {
+      ...state,
+      selectedTopic: action.payload,
     };
   },
 };
@@ -63,6 +70,7 @@ export default function useApplicationData() {
     topicData: [],
     modalState: null,
     favourites: {},
+    selectedTopic: 0,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -76,9 +84,7 @@ export default function useApplicationData() {
           payload: data,
         });
       });
-  }, []);
 
-  useEffect(() => {
     fetch("http://localhost:8001/api/topics")
       .then((res) => res.json())
       .then((data) => {
@@ -88,6 +94,22 @@ export default function useApplicationData() {
         });
       });
   }, []);
+
+  useEffect(() => {
+    if (state.selectedTopic && state.selectedTopic > 0) {
+      fetch(`http://localhost:8001/api/topics/photos/${state.selectedTopic}`)
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({
+            type: "SET_PHOTO_DATA",
+            payload: data,
+          });
+        })
+        .catch((err) => {
+          console.log("error fetchin topic photos", err);
+        });
+    }
+  }, [state.selectedTopic]);
 
   useEffect(() => {
     console.log("state", state);
@@ -115,11 +137,19 @@ export default function useApplicationData() {
     dispatch({ type: "REMOVE_FAV_PHOTO", payload: photoId });
   };
 
+  const selectTopic = (topicId) => {
+    dispatch({
+      type: "SELECT_TOPIC",
+      payload: topicId,
+    });
+  };
+
   return {
     state,
     openModal,
     closeModal,
     addFavPhoto,
     removeFavPhoto,
+    selectTopic,
   };
 }

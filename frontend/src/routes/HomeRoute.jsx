@@ -14,10 +14,11 @@ const HomeRoute = (props) => {
     closeModal,
     addFavPhoto,
     removeFavPhoto,
+    selectTopic,
   } = props;
   return (
     <div className="home-route">
-      <TopNavigation topics={topics} state={state} />
+      <TopNavigation topics={topics} state={state} selectTopic={selectTopic} />
 
       <PhotoList
         photos={photos}
