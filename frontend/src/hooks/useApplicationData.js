@@ -150,7 +150,7 @@ export default function useApplicationData() {
     if (
       state.selectedTopic &&
       state.selectedTopic > 0 &&
-      state.selectedTopic < state.topicData.length
+      state.selectedTopic <= state.topicData.length
     ) {
       fetch(`http://localhost:8001/api/topics/photos/${state.selectedTopic}`)
         .then((res) => res.json())
