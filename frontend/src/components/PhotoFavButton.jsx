@@ -6,6 +6,7 @@ import "../styles/PhotoFavButton.scss";
 function PhotoFavButton(props) {
   const { state, addFavPhoto, removeFavPhoto, photoId } = props;
   const favourites = state.favourites;
+
   const toggleFavourite = (photo) => {
     favourites[photoId] ? removeFavPhoto(photo) : addFavPhoto(photo);
   };

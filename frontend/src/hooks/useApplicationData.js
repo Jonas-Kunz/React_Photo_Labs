@@ -147,7 +147,11 @@ export default function useApplicationData() {
   }, []);
 
   useEffect(() => {
-    if (state.selectedTopic && state.selectedTopic > 0 && state.selectedTopic < state.topicData.length) {
+    if (
+      state.selectedTopic &&
+      state.selectedTopic > 0 &&
+      state.selectedTopic < state.topicData.length
+    ) {
       fetch(`http://localhost:8001/api/topics/photos/${state.selectedTopic}`)
         .then((res) => res.json())
         .then((data) => {
@@ -160,7 +164,10 @@ export default function useApplicationData() {
           console.log("error fetching topic photos", error);
           setError("error fetching topic photos please try again");
         });
-    } else if (state.selectedTopic && state.selectedTopic === (state.topicData.length + 1)) {
+    } else if (
+      state.selectedTopic &&
+      state.selectedTopic === state.topicData.length + 1
+    ) {
       fetch("http://localhost:8001/api/photos")
         .then((res) => res.json())
         .then((data) => {
@@ -175,10 +182,6 @@ export default function useApplicationData() {
         });
     }
   }, [state.selectedTopic]);
-
-  useEffect(() => {
-    console.log("state", state);
-  }, [state]);
 
   return {
     state,

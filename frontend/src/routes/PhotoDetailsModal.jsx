@@ -9,6 +9,7 @@ const PhotoDetailsModal = (props) => {
   const { state, openModal, closeModal, addFavPhoto, removeFavPhoto, photos } =
     props;
   const { id, location, similar_photos, urls, user } = state.modalState;
+
   const similar_photosArray = Object.values(similar_photos).map((photo) => {
     const photoObj = photos.find((ph) => ph.id === photo.id);
     return photoObj;
@@ -52,7 +53,7 @@ const PhotoDetailsModal = (props) => {
           <header className="photo-details-modal__header">
             <h3>Similar Photos</h3>
           </header>
-          <PhotoList 
+          <PhotoList
             aria-label="list of similar photos"
             photos={similar_photosArray}
             openModal={openModal}
