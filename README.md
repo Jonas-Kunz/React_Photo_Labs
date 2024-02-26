@@ -5,7 +5,7 @@ PhotoLabs is a single page app where users can view images of different categori
 
 ## Acknowledgements
 
-I would like to thank the mentors of lighthouse labs for their assitence with this project, especially Pedro A. González who went above and beyond in his assistence and greatly improved my understanding of rducers in particular.
+I would like to thank the mentors of lighthouse labs for their assitence with this project. Especially Pedro A. González who went above and beyond in his assistence and greatly improved my understanding of reducers in particular, and Yashsvi Girdhar for  helping me with making the favourites persistent.
 
 ## Screenshots
 

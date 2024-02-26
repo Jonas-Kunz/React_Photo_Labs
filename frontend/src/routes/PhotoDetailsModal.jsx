@@ -4,12 +4,13 @@ import "../styles/PhotoDetailsModal.scss";
 import closeSymbol from "../assets/closeSymbol.svg";
 import PhotoList from "components/PhotoList";
 import PhotoFavButton from "components/PhotoFavButton";
-
+// the photo detail modal shows a full view image along with similar images
 const PhotoDetailsModal = (props) => {
   const { state, openModal, closeModal, addFavPhoto, removeFavPhoto, photos } =
     props;
   const { id, location, similar_photos, urls, user } = state.modalState;
-
+  // similar_photosArray is the result of mapping the photos with similar photos so each similar phot has acces to its own similar photos
+  // I would like to thank Pedro A González for Helping me understand the data structure of photos and similar photos and how to use .find and .map
   const similar_photosArray = Object.values(similar_photos).map((photo) => {
     const photoObj = photos.find((ph) => ph.id === photo.id);
     return photoObj;

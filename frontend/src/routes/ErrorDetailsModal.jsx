@@ -1,12 +1,10 @@
 import React from "react";
 
-import "../styles/ErrorDetailsModal.scss"
+import "../styles/ErrorDetailsModal.scss";
 import closeSymbol from "../assets/closeSymbol.svg";
-
-
+// a rough modal i made to display errors to users
 const ErrorDetailsModal = (props) => {
-  const { state, closeError } =
-    props;
+  const { state, closeError } = props;
 
   return (
     <div className="error-details-modal">
@@ -27,4 +25,4 @@ const ErrorDetailsModal = (props) => {
   );
 };
 
-export default ErrorDetailsModal ;
+export default ErrorDetailsModal;

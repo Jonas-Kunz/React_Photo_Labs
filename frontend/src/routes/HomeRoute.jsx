@@ -4,7 +4,7 @@ import TopNavigation from "components/TopNavigationBar";
 import PhotoList from "components/PhotoList";
 import "../styles/HomeRoute.scss";
 // the home route mainly serves as a way to pass data to its children TopNavigation and Photolist
-// it recieves the photos array, topics array, state, and dispatch from App.jsx
+// it recieves the photos array, topics array, state, and dispatch functions from App.jsx
 const HomeRoute = (props) => {
   const {
     photos,

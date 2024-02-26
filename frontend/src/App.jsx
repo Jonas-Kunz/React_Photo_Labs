@@ -3,9 +3,9 @@ import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import ErrorDetailsModal from "routes/ErrorDetailsModal";
-import useApplicationData from "hooks/useApplicationData";
-// Note: Rendering a single component to build components in isolation
+import useApplicationData from "dataManagers/useApplicationData";
 
+// App serves mainly to pass props down to its children and conditionally render the photo and error details modals.
 const App = () => {
   const {
     state,
@@ -15,9 +15,9 @@ const App = () => {
     removeFavPhoto,
     selectTopic,
     closeError,
-    dispatch
+    dispatch,
   } = useApplicationData();
-  
+
   return (
     <div className="App">
       <HomeRoute
@@ -42,10 +42,7 @@ const App = () => {
         />
       )}
       {state.error && (
-        <ErrorDetailsModal
-          state={state}
-          closeError={closeError}
-        />
+        <ErrorDetailsModal state={state} closeError={closeError} />
       )}
     </div>
   );
