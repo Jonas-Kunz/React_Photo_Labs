@@ -15,11 +15,10 @@ const HomeRoute = (props) => {
     addFavPhoto,
     removeFavPhoto,
     selectTopic,
-    dispatch,
   } = props;
   return (
     <div className="home-route">
-      <TopNavigation topics={topics} state={state} selectTopic={selectTopic} dispatch={dispatch} />
+      <TopNavigation topics={topics} state={state} selectTopic={selectTopic}/>
 
       <PhotoList
         photos={photos}

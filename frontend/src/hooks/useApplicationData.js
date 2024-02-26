@@ -142,12 +142,12 @@ export default function useApplicationData() {
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-        setError(error);
+        setError("Error fetching data please try again");
       });
   }, []);
 
   useEffect(() => {
-    if (state.selectedTopic && state.selectedTopic > 0) {
+    if (state.selectedTopic && state.selectedTopic > 0 && state.selectedTopic < state.topicData.length) {
       fetch(`http://localhost:8001/api/topics/photos/${state.selectedTopic}`)
         .then((res) => res.json())
         .then((data) => {
@@ -157,10 +157,10 @@ export default function useApplicationData() {
           });
         })
         .catch((error) => {
-          console.log("error fetchin topic photos", error);
-          setError(error);
+          console.log("error fetching topic photos", error);
+          setError("error fetching topic photos please try again");
         });
-    } else {
+    } else if (state.selectedTopic && state.selectedTopic === (state.topicData.length + 1)) {
       fetch("http://localhost:8001/api/photos")
         .then((res) => res.json())
         .then((data) => {
@@ -171,7 +171,7 @@ export default function useApplicationData() {
         })
         .catch((error) => {
           console.log("error reloading main page", error);
-          setError(error);
+          setError("error reloading main page please try again");
         });
     }
   }, [state.selectedTopic]);
@@ -187,7 +187,6 @@ export default function useApplicationData() {
     addFavPhoto,
     removeFavPhoto,
     selectTopic,
-    dispatch,
     closeError,
   };
 }
