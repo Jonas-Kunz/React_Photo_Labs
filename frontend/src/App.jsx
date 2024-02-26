@@ -2,6 +2,7 @@ import React from "react";
 import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
+import ErrorDetailsModal from "routes/ErrorDetailsModal";
 import useApplicationData from "hooks/useApplicationData";
 // Note: Rendering a single component to build components in isolation
 
@@ -13,8 +14,10 @@ const App = () => {
     addFavPhoto,
     removeFavPhoto,
     selectTopic,
+    closeError,
+    dispatch
   } = useApplicationData();
-
+  
   return (
     <div className="App">
       <HomeRoute
@@ -26,6 +29,7 @@ const App = () => {
         addFavPhoto={addFavPhoto}
         removeFavPhoto={removeFavPhoto}
         selectTopic={selectTopic}
+        dispatch={dispatch}
       />
       {state.modalState && (
         <PhotoDetailsModal
@@ -35,6 +39,12 @@ const App = () => {
           addFavPhoto={addFavPhoto}
           removeFavPhoto={removeFavPhoto}
           photos={state.photoData}
+        />
+      )}
+      {state.error && (
+        <ErrorDetailsModal
+          state={state}
+          closeError={closeError}
         />
       )}
     </div>

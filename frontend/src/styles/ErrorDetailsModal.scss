@@ -1,0 +1,32 @@
+.error-details-modal {
+  background-color: white;
+  box-shadow: 0 0 0 50vmax rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  height: 100px;
+  width: 20%;
+  overflow-y: scroll;
+  border-radius: 12px;
+}
+
+.error-details-modal__close-button {
+  background-color: white;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 16px;
+  margin-top: 16px;
+}
+
+.error-details-modal__error {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: red;
+}

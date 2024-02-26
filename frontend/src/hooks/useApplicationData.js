@@ -54,6 +54,13 @@ const ACTIONS = {
       selectedTopic: action.payload,
     };
   },
+
+  SET_ERROR: (state, action) => {
+    return {
+      ...state,
+      error: action.payload,
+    };
+  },
 };
 
 const reducer = function (state, action) {
@@ -66,6 +73,7 @@ const reducer = function (state, action) {
 
 export default function useApplicationData() {
   const initialState = {
+    error: "",
     photoData: [],
     topicData: [],
     modalState: null,
@@ -74,47 +82,6 @@ export default function useApplicationData() {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    fetch("http://localhost:8001/api/photos")
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({
-          type: "SET_PHOTO_DATA",
-          payload: data,
-        });
-      });
-
-    fetch("http://localhost:8001/api/topics")
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({
-          type: "SET_TOPIC_DATA",
-          payload: data,
-        });
-      });
-  }, []);
-
-  useEffect(() => {
-    if (state.selectedTopic && state.selectedTopic > 0) {
-      fetch(`http://localhost:8001/api/topics/photos/${state.selectedTopic}`)
-        .then((res) => res.json())
-        .then((data) => {
-          dispatch({
-            type: "SET_PHOTO_DATA",
-            payload: data,
-          });
-        })
-        .catch((err) => {
-          console.log("error fetchin topic photos", err);
-        });
-    }
-  }, [state.selectedTopic]);
-
-  useEffect(() => {
-    console.log("state", state);
-  }, [state]);
-
   const openModal = (photo) => {
     dispatch({
       type: "OPEN_MODAL",
@@ -144,6 +111,75 @@ export default function useApplicationData() {
     });
   };
 
+  const closeError = () => {
+    dispatch({
+      type: "SET_ERROR",
+      payload: "",
+    });
+  };
+
+  const setError = (error) => {
+    dispatch({
+      type: "SET_ERROR",
+      payload: `${error}`,
+    });
+  };
+
+  useEffect(() => {
+    Promise.all([
+      fetch("http://localhost:8001/api/photos").then((res) => res.json()),
+      fetch("http://localhost:8001/api/topics").then((res) => res.json()),
+    ])
+      .then(([photosData, topicsData]) => {
+        dispatch({
+          type: "SET_PHOTO_DATA",
+          payload: photosData,
+        });
+        dispatch({
+          type: "SET_TOPIC_DATA",
+          payload: topicsData,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setError(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (state.selectedTopic && state.selectedTopic > 0) {
+      fetch(`http://localhost:8001/api/topics/photos/${state.selectedTopic}`)
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({
+            type: "SET_PHOTO_DATA",
+            payload: data,
+          });
+        })
+        .catch((error) => {
+          console.log("error fetchin topic photos", error);
+          setError(error);
+        });
+    } else {
+      fetch("http://localhost:8001/api/photos")
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({
+            type: "SET_PHOTO_DATA",
+            payload: data,
+          });
+        })
+        .catch((error) => {
+          console.log("error reloading main page", error);
+          setError(error);
+        });
+    }
+  }, [state.selectedTopic]);
+
+  useEffect(() => {
+    console.log("state", state);
+  }, [state]);
+
   return {
     state,
     openModal,
@@ -151,5 +187,7 @@ export default function useApplicationData() {
     addFavPhoto,
     removeFavPhoto,
     selectTopic,
+    dispatch,
+    closeError,
   };
 }

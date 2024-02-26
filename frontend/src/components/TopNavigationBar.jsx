@@ -5,14 +5,21 @@ import "../styles/TopNavigationBar.scss";
 
 const TopNavigation = (props) => {
   // recieves the topics data and state props
-  const { topics, state, selectTopic } = props;
+  const { topics, state, selectTopic, dispatch } = props;
   // if the favourites object has any values isFavPhotExist is set true else false
   const isFavPhotoExist = Object.values(state.favourites).length > 0;
+  const handleTopicSelect = (event, topicId) => {
+    event.preventDefault();
+    selectTopic(topicId);
+  };
 
   return (
     <div className="top-nav-bar">
-      <span className="top-nav-bar__logo">PhotoLabs</span>
-
+      <a href="http://localhost:3000/" onClick={(event) => handleTopicSelect(event, 0)} style={{ textDecoration: "none" }}><span className="top-nav-bar__logo" >PhotoLabs</span></a>
+      <button onClick={() => dispatch({
+        type: "SET_ERROR",
+        payload: "ERROR_SET"
+      })}>cause error</button>
       <TopicList topics={topics} selectTopic={selectTopic} />
 
       <FavBadge isFavPhotoExist={isFavPhotoExist} />

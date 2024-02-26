@@ -52,7 +52,7 @@ const PhotoDetailsModal = (props) => {
           <header className="photo-details-modal__header">
             <h3>Similar Photos</h3>
           </header>
-          <PhotoList
+          <PhotoList 
             aria-label="list of similar photos"
             photos={similar_photosArray}
             openModal={openModal}
