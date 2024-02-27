@@ -28,6 +28,7 @@ const HomeRoute = (props) => {
         closeModal={closeModal}
         addFavPhoto={addFavPhoto}
         removeFavPhoto={removeFavPhoto}
+        modalClass={""}
       />
     </div>
   );

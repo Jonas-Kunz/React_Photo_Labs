@@ -4,7 +4,7 @@ import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
 
 const PhotoList = (props) => {
-  const { photos, state, openModal, closeModal, removeFavPhoto, addFavPhoto } =
+  const { photos, state, openModal, closeModal, removeFavPhoto, addFavPhoto, modalClass } =
     props;
 
   const photoListItems = photos.map((photo) => (
@@ -21,9 +21,10 @@ const PhotoList = (props) => {
       closeModal={closeModal}
       openModal={openModal}
       photo={photo}
+      modalClass={modalClass}
     />
   ));
-  return <ul className="photo-list">{photoListItems}</ul>;
+  return <ul className={`photo-list${modalClass}`} >{photoListItems}</ul>;
 };
 
 export default PhotoList;

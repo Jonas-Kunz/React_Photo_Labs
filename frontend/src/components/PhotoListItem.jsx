@@ -14,10 +14,11 @@ const PhotoListItem = (props) => {
     openModal,
     addFavPhoto,
     removeFavPhoto,
+    modalClass
   } = props;
 
   return (
-    <article className="photo-list__item">
+    <article className={`photo-list__item${modalClass}`}>
       <PhotoFavButton
         state={state}
         addFavPhoto={addFavPhoto}
@@ -27,23 +28,23 @@ const PhotoListItem = (props) => {
       />
       <img
         src={urls.regular}
-        className="photo-list__image"
+        className={`photo-list__image${modalClass}`}
         alt="main image"
         onClick={() => openModal(photo)}
         aria-label="click on image to view Full Size Image"
       />
-      <footer className="photo-list__user-details">
+      <footer className={`photo-list__user-details${modalClass}`}>
         <img
           src={user.profile}
-          className="photo-list__user-profile"
+          className={`photo-list__user-profile${modalClass}`}
           alt={`profile picture of ${user.username}`}
         />
         <div
-          className="photo-list__user-info"
+          className={`photo-list__user-info${modalClass}`}
           aria-label="division containing user information"
         >
           {user.username}
-          <div className="photo-list__user-location" aria-label="use location">
+          <div className={`photo-list__user-location${modalClass}`} aria-label="use location">
             {location.city}, {location.country}
           </div>
         </div>

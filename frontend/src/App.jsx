@@ -15,7 +15,6 @@ const App = () => {
     removeFavPhoto,
     selectTopic,
     closeError,
-    dispatch,
   } = useApplicationData();
 
   return (
@@ -29,7 +28,6 @@ const App = () => {
         addFavPhoto={addFavPhoto}
         removeFavPhoto={removeFavPhoto}
         selectTopic={selectTopic}
-        dispatch={dispatch}
       />
       {state.modalState && (
         <PhotoDetailsModal
